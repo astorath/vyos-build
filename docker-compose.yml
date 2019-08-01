@@ -1,0 +1,16 @@
+# code: tabSize
+version: "2"
+
+services:
+  build-deps:
+    build: ./docker/
+    image: vyos-builder:latest
+    command: "true"
+
+  build-vyos:
+    depends_on:
+      - build-deps
+    build: .
+    privileged: true
+    volumes:
+      - ./target:/target
